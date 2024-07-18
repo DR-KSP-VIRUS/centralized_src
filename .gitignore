@@ -1,2 +1,6 @@
 central_env
 db.sqlite3
+accounts/migrations/
+accounts/__pycache__/
+posts/migrations/
+posts/__pycache__/
