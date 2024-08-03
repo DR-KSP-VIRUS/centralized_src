@@ -1,0 +1,32 @@
+<ul class="bg-black/80 fixed text-white flex flex-col h-screen w-[120px] lg:w-[220px]">
+    <li class="cursor-pointer my-4 py-3 hover:bg-black/50">
+        <a class="w-full" href="{% url 'accounts:dashboard' %}">
+            <span class="px-4 lg:px-8">Dashboard</span>
+        </a>
+    </li>
+    <li class="blog cursor-pointer pt-3 pb-0 hover:bg-black/50">
+        <span class="px-4 lg:px-8">Blogs</span>
+        <span class="float-end text-lg"> &gt; </span>
+        <ul class="hidden bg-black/90 w-full">
+            <li class="py-2 hover:bg-gray-700/50">
+                <a class="w-full" href="{% url 'posts:new-blogs' %}">
+                    <span class="px-6 whitespace-nowrap lg:px-10">New Blog</span>
+                </a>
+            </li>
+            <li class="py-2 hover:bg-gray-700/50">
+                <a class="w-full" href="{% url 'posts:blogs' %}">
+                    <span class="px-6 lg:px-10">Blogs</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="cursor-pointer my-4 py-3 hover:bg-black/50">
+        <a class="w-full" href="{% url 'accounts:dashboard' %}">
+            <span class="px-4 lg:px-8">Settings</span>
+        </a>
+    </li>
+    <li class="cursor-pointer mb-0 py-4 my-auto border-t text-red-500 hover:border-b">
+        <a class="px-8 pb-4 w-full" href="{% url 'accounts:logout' %}">logout</a>
+    </li>
+</ul>

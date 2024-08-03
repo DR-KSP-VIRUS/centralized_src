@@ -1,4 +1,3 @@
-from typing import Any
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
@@ -79,7 +78,7 @@ class Portfolio(models.Model):
     second_phone =  models.CharField(blank=True, null=True, max_length=255)
     email = models.CharField(blank=True, null=True, max_length=255)
     photo = models.ImageField(blank=True, null=True, max_length=255)
-    turnor = models.CharField(blank=True, null=True, max_length=255)
+    turnor = models.CharField(blank=True, null=True, max_length=255) #2024/2025
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

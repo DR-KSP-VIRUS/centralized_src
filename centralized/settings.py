@@ -6,6 +6,10 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# TAILWINDCSS_CLI_FILE = BASE_DIR / 'tailwindcss-windows-x64.exe'
+# TAILWINDCSS_CONFIG_FILE = BASE_DIR / 'tailwind.config.js'
+
+# TAILWINDCSS_OUTPUT_FILE = "style.css"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -29,6 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'tailwindcss',
+    'compressor',
 ]
 
 MIDDLEWARE = [
@@ -46,7 +52,7 @@ ROOT_URLCONF = 'centralized.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,6 +124,9 @@ MEDIA_ROOT = [
     os.path.join(BASE_DIR, 'media')
 ]
 
+COMPRESS_ROOT = BASE_DIR / 'static'
+COMPRESS_ENABLED = True
+STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

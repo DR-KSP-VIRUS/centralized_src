@@ -1,0 +1,24 @@
+<div class="bg-black text-white px-8 py-4">
+    <ul class="flex place-content-between">
+        <li class="cursor-pointer hover:border-b">
+            <a href="{% url 'posts:home' %}"> Home </a>
+        </li>
+        {% if not user.is_authenticated %}
+            <ul class="mx-auto flex">
+            <li class="mx-2 cursor-pointer hover:border-b">Blog
+                <ul class="hidden">
+                    <li class="cursor-pointer">Current News</li>
+                    <li class="cursor-pointer">previous News</li>
+                </ul>
+            </li>
+            <li class="mx-2 cursor-pointer hover:border-b ">About Us</li>
+            </ul>
+        
+            <li id="open-login" class="cursor-pointer hover:border-b">login</li>
+        {% else %}
+            <li  class="cursor-pointer text-red-500 hover:border-b">
+                <a href="{% url 'accounts:logout' %}">logout</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
