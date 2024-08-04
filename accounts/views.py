@@ -7,7 +7,7 @@ from . import forms as fms
 
 # Create your views here.
 
-def user_login_form(request: HttpRequest) -> HttpResponse:
+def user_login_form(request: HttpRequest,*args, **kwargs) -> HttpResponse:
     if request.method == "POST":
         form = fms.LoginForm(data=request.POST)
         if form.is_valid():
@@ -21,10 +21,51 @@ def user_login_form(request: HttpRequest) -> HttpResponse:
         return redirect('posts:home')
     return redirect('posts:home')
             
-def user_dashboard(request:HttpRequest) -> HttpResponse:
+def user_dashboard(request:HttpRequest,*args, **kwargs) -> HttpResponse:
     context = {}
     return render(request, 'accounts/dashboard.html',context)
 
-def user_logout(request:HttpRequest) -> HttpResponse:
+def user_logout(request:HttpRequest, *args, **kwargs) -> HttpResponse:
     logout(request)
     return redirect('posts:home')
+
+def add_portfolio(request:HttpRequest,*args, **kwargs) -> HttpResponse:
+    form = fms.PortfolioForm(data=request.POST, files=request.FILES)
+    if form.is_valid():
+        portfolio = form.save(commit=False)
+        portfolio.user = request.user
+        portfolio.save()
+        return redirect('accounts:portfolios')
+    return redirect('accounts:portfolios')
+
+def portfolios(request:HttpRequest,*args, **kwargs) -> HttpResponse:
+    form = fms.PortfolioForm()
+    ports = mdl.Portfolio.objects.all()
+    context={
+        "form":form,
+        'ports':ports
+    }
+    return render(request, 'accounts/portfolio.html', context)
+
+def remove_portfoloio(request:HttpRequest, id:int, *args, **kwargs) -> HttpResponse:
+    portfolio = get_object_or_404(mdl.Portfolio, pk=id)
+    portfolio.delete()
+    return redirect('accounts:portfolios')
+
+def edit_portfolio(request:HttpRequest, id:int, *args, **kwargs)->HttpResponse:
+    portfolio = get_object_or_404(mdl.Portfolio, pk=id)
+    if request.method == "POST":
+        form = fms.PortfolioForm(instance=portfolio, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            port = form.save(commit=False)
+            port.user = request.user
+            port.save()
+            return redirect('accounts:portfolios')
+    else:
+        form = fms.PortfolioForm(instance=portfolio)
+    context = {
+        'form':form,
+        'portfolio':portfolio
+    }
+
+    return render(request, 'accounts/edit_portfolio.html', context)

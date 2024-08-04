@@ -1,8 +1,10 @@
 central_env
 db.sqlite3
-accounts/migrations/
+accounts/migrations
 accounts/__pycache__/
-posts/migrations/
+posts/migrations
 posts/__pycache__/
 package-lock.json
-node_modules/
+node_modules
+media
+static/CACHE/css

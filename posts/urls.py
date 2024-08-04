@@ -10,5 +10,5 @@ urlpatterns = [
     path('add-blog', v.add_blog, name='add-blog'),
     path('new-blogs', v.new_blogs, name='new-blogs'),
     path('blogs', v.blogs, name='blogs'),
-    # path('post/<pk:int>', v.posts, name='posts'),
+    path('about-us', v.about_us, name='about-us'),
 ]

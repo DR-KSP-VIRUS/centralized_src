@@ -1,26 +1,10 @@
 {% extends "base.html" %}
-{% load static %}
 
+{% block title %} About Us{% endblock title %}
 
-{% block title %} Portfolios {% endblock title %}
-
-{% block tab %}
-<h1 class="font-semibold text-2xl">Portfolios</h1>
-{% endblock tab %}
-
-
-{% block admincontent %}
-{% include "accounts/add_portfolio.html" %}
-<div class=" grid grid-cols-2 px-2 mt-6">
-    <button id="open-login"
-        class="cursor-pointer flex place-content-center text-lg place-items-center shadow-sm transition active:scale-90 col-start-11 col-span-2  text-orange-500 border rounded pl-4 bg-white whitespace-nowrap">Add
-        Portfolio <span class="bg-gray-800 px-2 text-2xl rounded-r ml-2 text-white">&plus;</span> </button>
-</div>
-
-<div class="grid grid-cols-1 py-4 my-2 md:grid-cols-2">
+{% block content %}
+    <div class="grid grid-cols-1 py-4 my-2 px-8 md:grid-cols-3">
     {% for port in ports %}
-    {% include "accounts/_modal_form.html" %}
-
     <div class="bg-white rounded z-0 shadow my-4 transition-all hover:-translate-y-1 md:mr-4">
         <h1 class="text-2xl font-bold text-gray-600 px-6 py-4 border-b">{{port.title}}
         </h1>
@@ -37,14 +21,9 @@
                     <p class="font-bold text-gray-400">{{port.first_phone}} / {{port.second_phone}}</p>
                     <p class="text-red-600 font-bold">{{port.email}}</p>
                 </div>
-                <div class="flex place-content-between float-end">
-                    <a href="{% url 'accounts:edit-portfolio' port.id %}"
-                        class="text-emerald-600 text-sm font-semibold border rounded px-6 py-2 transition shadow active:scale-90">Edit</a>
-                    <button type="button" class="open-dialog text-red-700 text-sm font-semibold border rounded px-6 py-2 transition shadow active:scale-90">Delete</button>
-                </div>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
-{% endblock admincontent %}
+{% endblock content %}

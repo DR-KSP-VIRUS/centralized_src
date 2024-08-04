@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-{% load compress %}
 {% load static %}
+{% load compress %}
 <html lang="en">
 
 <head>
@@ -14,14 +14,17 @@
 
 <body>
     {% comment %} npx tailwindcss -i ./static/src/input.css -o ./static/src/output.css {% endcomment %}
-    <div class="flex flex-col min-h-screen bg-white">
+    <div class="flex flex-col min-h-screen bg-gray-100">
         {% if not user.is_authenticated %}
             {% include "nav.html" %}
+            {% include "accounts/login.html" %}
         {% endif %}
-        <div class=" flex min-h-screen bg-white">
+        <div class="grid grid-cols-12 bg-gray-100">
             {% if  user.is_authenticated %}
-                {% include "sidebar.html" %}
-                <div class="w-full ml-[120px] lg:ml-[220px]">
+                <div class="col-start-1 col-span-1 row-auto">
+                    {% include "sidebar.html" %}
+                </div>
+                <div class=" col-start-2 col-span-11 ml-[80px] lg:ml-[120px]">
                     <nav class="bg-gray-200/50 px-4 py-2 w-full border-b z-10">
                         <ul class="flex place-content-between w-full">
                             <li>

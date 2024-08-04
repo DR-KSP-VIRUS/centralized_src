@@ -77,7 +77,7 @@ class Portfolio(models.Model):
     first_phone = models.CharField(blank=True, null=True, max_length=255)
     second_phone =  models.CharField(blank=True, null=True, max_length=255)
     email = models.CharField(blank=True, null=True, max_length=255)
-    photo = models.ImageField(blank=True, null=True, max_length=255)
+    photo = models.ImageField(upload_to="images/%Y/%m/%d")
     turnor = models.CharField(blank=True, null=True, max_length=255) #2024/2025
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -1,4 +1,10 @@
-<ul class="bg-black/80 fixed text-white flex flex-col h-screen w-[120px] lg:w-[220px]">
+{% load static %}
+<ul class="bg-black/80 fixed text-white flex flex-col min-h-screen w-[120px] lg:w-[220px]">
+    <div class="mt-16 mb-8 flex flex-col mx-4 lg:mx-8">
+            <img class="w-16 h-16 rounded-full border hover:cursor-pointer" src="{% static 'src/images/CK-LOGO.png' %}" alt="#">
+        <h2 class="whitespace-nowrap py-2 hidden lg:block">KONJA KUMA SAMPSON</h2>
+    </div>
+
     <li class="cursor-pointer my-4 py-3 hover:bg-black/50">
         <a class="w-full" href="{% url 'accounts:dashboard' %}">
             <span class="px-4 lg:px-8">Dashboard</span>
@@ -20,8 +26,12 @@
             </li>
         </ul>
     </li>
-
-    <li class="cursor-pointer my-4 py-3 hover:bg-black/50">
+    <li class="cursor-pointer my-2 py-3 hover:bg-black/50">
+        <a class="w-full" href="{% url 'accounts:portfolios' %}">
+            <span class="px-4 lg:px-8">Portfolio</span>
+        </a>
+    </li>
+    <li class="cursor-pointer my-2 py-3 hover:bg-black/50">
         <a class="w-full" href="{% url 'accounts:dashboard' %}">
             <span class="px-4 lg:px-8">Settings</span>
         </a>
