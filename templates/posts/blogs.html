@@ -7,10 +7,10 @@
 
 {% block admincontent %}
 
-{% include "accounts/add_portfolio.html" %}
-<div class=" grid grid-cols-2 px-2 mt-6">
+{% include "accounts/add_blog.html" %}
+<div class=" grid grid-cols-2 px-2 my-6">
     <button id="open-login" class="cursor-pointer flex place-content-center text-lg place-items-center shadow-sm transition active:scale-90 col-start-11 col-span-2  text-orange-500 border rounded pl-4 bg-white whitespace-nowrap">Add
-        Portfolio <span class="bg-gray-800 px-2 text-2xl rounded-r ml-2 text-white">&plus;</span>
+        Blog <span class="bg-gray-800 px-2 text-2xl rounded-r ml-2 text-white">&plus;</span>
     </button>
 </div>
 
@@ -21,21 +21,26 @@
             <thead class="text-sm text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">No.</th>
-                    <th scope="col" class="px-6 py-3 whitespace-nowrap">Blog
-                        Title</th>
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">Blog Title</th>
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">Date Created</th>
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">Date Updated</th>
                     <th scope="col" class="px-6 py-3 whitespace-nowrap text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
+                {% for post in posts %}
                 <tr class="bg-white border-t hover:bg-gray-100">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">1</th>
-                    <td class="px-6 py-4 whitespace-nowrap">First Title</td>
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{forloop.counter}}</th>
+                    <td class="px-6 py-4 whitespace-nowrap">{{post.title}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{post.created}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{post.updated}}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <a href="#" class="px-4 py-2 rounded text-black border bg-white font-semibold"> view</a>
-                        <a href="#" class="px-4 py-2 rounded text-orange-700 bg-white border font-semibold"> edit</a>
-                        <a href="#" class="px-2 py-2 rounded text-red-600 bg-white border font-semibold"> delete</a>
+                        <a href="{% url 'posts:blog_details' post.id %}" class="px-4 py-2 rounded text-black border bg-white font-semibold"> view</a>
+                        <a href="{% url 'posts:edit-blog' post.id %}" class="px-4 py-2 rounded text-orange-700 bg-white border font-semibold"> edit</a>
+                        <a href="{% url 'posts:remove-blog' post.id %}" class="px-2 py-2 rounded text-red-600 bg-white border font-semibold"> delete</a>
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.blog:hover>.hidden {
-    display: flex;
-    flex-direction: column;
-}
-
-.blog:hover>.float-end {
-    transform: rotate(90deg);
-}
-
 .profile:hover>.hidden {
     display: flex;
     flex-direction: column;

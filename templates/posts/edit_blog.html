@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %} Edit | {{post.title}} {% endblock title %}
+
+{% block tab %}
+<h1 class="font-semibold text-sm uppercase"><a class="text-orange-500 text-2xl capitalize"
+        href="{% url 'posts:blog_details' post.id %}">&blacktriangleleft;Back</a> Edit
+    {{post.title}}
+</h1>
+{% endblock tab %}
+
+
+{% block admincontent %}
+
+<div class=" flex place-content-center place-items-center min-w-full px-6 my-6">
+    <div class="bg-white flex flex-col w-full rounded md:w-[520px]">
+        <h1 class="font-extrabold text-2xl px-4 py-2 min-w-full flex flex-row place-content-between border-b uppercase">
+            Update {{post.title}}
+        </h1>
+        <form class="flex flex-col px-4 py-2" action="{% url 'posts:edit-blog' post.id %}" method="POST">
+            {% csrf_token %}
+            <div class="flex flex-col my-2">
+                <label class="font-semibold my-2">{{form.title.label}}</label>
+                {{ form.title}}
+
+            </div>
+            <div class="flex flex-col my-2">
+                <label class="my-2 font-semibold">{{form.content.label}}</label>
+                {{form.content}}
+            </div>
+            <button type="submit"
+                class="cursor-pointer px-4 py-2 border border-orange-600 my-4 rounded w-full self-center shadow-inner transition hover:bg-orange-700 hover:text-white active:scale-90">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock admincontent %}

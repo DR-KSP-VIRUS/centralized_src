@@ -55,7 +55,7 @@ class PortfolioForm(forms.ModelForm):
             'photo':forms.ClearableFileInput(attrs={
                 'class':"form-control",
                 'placeholder': 'e.g 0541424847',
-                'required':True,
+                'required':False,
             }),
             'turnor':forms.TextInput(attrs={
                 'class':"form-control",

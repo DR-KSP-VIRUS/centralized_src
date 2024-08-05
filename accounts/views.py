@@ -1,9 +1,11 @@
 from django.shortcuts import redirect, render, get_list_or_404, get_object_or_404
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 from . import models as mdl
 from . import forms as fms
+from posts import models as pmdl
 
 # Create your views here.
 
@@ -20,15 +22,22 @@ def user_login_form(request: HttpRequest,*args, **kwargs) -> HttpResponse:
             return redirect('posts:home')
         return redirect('posts:home')
     return redirect('posts:home')
-            
+
+@login_required
 def user_dashboard(request:HttpRequest,*args, **kwargs) -> HttpResponse:
-    context = {}
+    posts = pmdl.Post.objects.order_by('-updated').all()
+
+    context = {
+        'posts':posts
+    }
     return render(request, 'accounts/dashboard.html',context)
 
+@login_required
 def user_logout(request:HttpRequest, *args, **kwargs) -> HttpResponse:
     logout(request)
     return redirect('posts:home')
 
+@login_required
 def add_portfolio(request:HttpRequest,*args, **kwargs) -> HttpResponse:
     form = fms.PortfolioForm(data=request.POST, files=request.FILES)
     if form.is_valid():
@@ -38,6 +47,7 @@ def add_portfolio(request:HttpRequest,*args, **kwargs) -> HttpResponse:
         return redirect('accounts:portfolios')
     return redirect('accounts:portfolios')
 
+@login_required
 def portfolios(request:HttpRequest,*args, **kwargs) -> HttpResponse:
     form = fms.PortfolioForm()
     ports = mdl.Portfolio.objects.all()
@@ -47,11 +57,13 @@ def portfolios(request:HttpRequest,*args, **kwargs) -> HttpResponse:
     }
     return render(request, 'accounts/portfolio.html', context)
 
+@login_required
 def remove_portfoloio(request:HttpRequest, id:int, *args, **kwargs) -> HttpResponse:
     portfolio = get_object_or_404(mdl.Portfolio, pk=id)
     portfolio.delete()
     return redirect('accounts:portfolios')
 
+@login_required
 def edit_portfolio(request:HttpRequest, id:int, *args, **kwargs)->HttpResponse:
     portfolio = get_object_or_404(mdl.Portfolio, pk=id)
     if request.method == "POST":
@@ -60,7 +72,7 @@ def edit_portfolio(request:HttpRequest, id:int, *args, **kwargs)->HttpResponse:
             port = form.save(commit=False)
             port.user = request.user
             port.save()
-            return redirect('accounts:portfolios')
+            return redirect('accounts:edit-portfolio',id=portfolio.id)
     else:
         form = fms.PortfolioForm(instance=portfolio)
     context = {
