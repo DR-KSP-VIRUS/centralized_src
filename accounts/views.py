@@ -9,6 +9,14 @@ from posts import models as pmdl
 
 # Create your views here.
 
+def signup(request:HttpRequest, *args, **kwargs) -> HttpResponse:
+    if request.method == 'POST':
+        form = fms.SignupForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('posts:home')
+    return redirect('posts:home')
+
 def user_login_form(request: HttpRequest,*args, **kwargs) -> HttpResponse:
     if request.method == "POST":
         form = fms.LoginForm(data=request.POST)
@@ -18,6 +26,8 @@ def user_login_form(request: HttpRequest,*args, **kwargs) -> HttpResponse:
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user=user)
+                if user.student:
+                    return redirect('posts:home')
                 return redirect('accounts:dashboard')
             return redirect('posts:home')
         return redirect('posts:home')

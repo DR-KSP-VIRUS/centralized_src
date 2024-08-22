@@ -1,4 +1,5 @@
 from django import forms
+from django.db import transaction
 from . import models as mdl
 
 class LoginForm(forms.Form):
@@ -11,6 +12,46 @@ class LoginForm(forms.Form):
         'class':"form-control",
         'placeholder': 'Password...'
     }))
+
+class SignupForm(forms.ModelForm):
+    password = forms.CharField(max_length=255, required=True, widget=forms.PasswordInput(attrs={
+        'class':'form-control',
+        'placeholder':'Enter atleast 6 charaters'
+    }))
+    password1 = forms.CharField(label='Confirm Password',max_length=255, required=True, widget=forms.PasswordInput(attrs={
+        'class':'form-control',
+        'placeholder':'Confirm Password'
+    }))
+    class Meta:
+        model = mdl.User
+        fields = ('full_name','email',)
+        widgets = {
+            'email':forms.EmailInput(attrs={
+                'class':'form-control',
+                'placeholder':'Enter active email...',
+            }),
+            'full_name': forms.TextInput(attrs={
+                'class':'form-control',
+                'placeholder':'e.g Konja Kuma'
+            })
+        }
+
+    def cleaned_password(self):
+        password = self.cleaned_data.get('password')
+        password1 = self.cleaned_data.get('password1')
+        if(password and password1) and (password1 == password):
+            return password1
+        raise forms.ValidationError('Passwords do not match')
+    
+    @transaction.atomic
+    def save(self, commit: bool = False):
+        user = super().save(commit)
+        user.email = self.cleaned_data.get('email')
+        user.full_name = self.cleaned_data.get('full_name')
+        user.set_password(self.cleaned_password())
+        user.student = True
+        user.save()
+        return user
 
 class PortfolioForm(forms.ModelForm):
     

@@ -8,9 +8,9 @@
 <div class="p-4">
     <h1 class="text-black text-3xl font-semibold">Current news update</h1>
 </div>
-<div class="px-4 md:w-[600px]">
+<div class="px-4">
     {% for post in posts %}
-    <div class="bg-white rounded-md">
+    <div class="bg-white my-2 rounded-md md:w-[600px]">
         <h2 class="font-semibold text-xl px-2 py-3 flex place-content-between place-items-center">{{post.title}}
             <span class="font-thin text-sm italic text-gray-400">{{post.updated}}</span>
         </h2>
@@ -23,7 +23,7 @@
                 {{post.post_comments.count}}
             </a>
         </div>
-        <div class="py-2 border-t px-2  comment-forms">
+        <div class="py-2 border-t px-2 hidden comment-forms">
             <div class=" py-2 mx-2 my-2">
                 {% for comment in post.post_comments.all %}
                 <div class="ml-4 px-2 bg-gray-100 my-2 rounded">
@@ -49,21 +49,22 @@
                 <div class="flex w-full place-items-center">
                     {% if request.user.is_authenticated %}
                     <button type="submit"
-                        class="cursor-pointer px-4 my-2 py-2 border border-orange-600 rounded w-1/3 self-end shadow-inner transition hover:bg-orange-700 hover:text-white active:scale-90"
-                        >Comment</button>
-                    {% else %}
-                    <button type="button" id="login-comment"
                         class="cursor-pointer px-4 my-2 py-2 border border-orange-600 rounded w-1/3 self-end shadow-inner transition hover:bg-orange-700 hover:text-white active:scale-90">Comment</button>
+                    {% else %}
+                    <button type="button"
+                        class="login-comment cursor-pointer px-4 my-2 py-2 border border-orange-600 rounded w-1/3 self-end shadow-inner transition hover:bg-orange-700 hover:text-white active:scale-90">Comment</button>
                     {% endif %}
                 </div>
             </form>
         </div>
-        <div id="comment-info" class="bg-black/50 fixed top-0 left-0 right-0 bottom-0 hidden flex-col place-content-center place-items-center">
+        <div id="comment-info"
+            class="bg-black/50 fixed top-0 left-0 right-0 bottom-0 hidden flex-col place-content-center place-items-center">
             <div class="bg-white px-4 py-2 rounded flex flex-col">
                 <h2 class="font-semibold text-lg"><i class="fa fa-info-circle text-sky-600"></i> Info</h2>
-                <p class="py-2 text-gray-600">Login to access comment section!</p>
-                <button id="close-comment-info" type="button" class="cursor-pointer px-4 my-2 py-2 border border-orange-600 rounded shadow-inner transition hover:bg-orange-700 hover:text-white active:scale-90 disabled:bg-slate-400">OK!</button>
-           </div>
+                <p class="py-2 text-gray-600">You need to login to access comment section!</p>
+                <button id="close-comment-info" type="button"
+                    class="cursor-pointer px-4 my-2 py-2 border border-orange-600 rounded shadow-inner transition hover:bg-orange-700 hover:text-white active:scale-90 disabled:bg-slate-400">OK!</button>
+            </div>
         </div>
     </div>
     {% endfor %}
@@ -74,3 +75,4 @@
 <script src="{% static 'src/js/comment.js' %}"></script>
 
 {% endblock scripts %}
+

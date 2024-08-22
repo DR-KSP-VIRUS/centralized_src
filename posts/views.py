@@ -14,10 +14,13 @@ def index(request,*args, **kwargs):
     login_form = ac_fms.LoginForm()
     commentForm = fms.CommentForm()
     posts = mdl.Post.objects.order_by('-updated').all()
+    signup_form = ac_fms.SignupForm()
+
     context = {
         'form':login_form,
         'posts':posts,
-        'comment_form':commentForm
+        'comment_form':commentForm,
+        'signupform':signup_form
     }
     return render(request, 'posts/index.html', context)
 
@@ -78,9 +81,12 @@ def remove_blog(request:HttpRequest, id:int, *args, **kwargs) -> HttpResponse:
 def about_us(request:HttpRequest, *args, **kwargs):
     portfolios = ac_mdl.Portfolio.objects.all()
     login_form = ac_fms.LoginForm()
+    signup_form = ac_fms.SignupForm()
+
     context = {
         'ports':portfolios,
-        'form':login_form
+        'form':login_form,
+        'signupform':signup_form
     }
     return render(request, 'posts/about_us.html', context)
 

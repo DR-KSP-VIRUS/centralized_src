@@ -6,6 +6,8 @@ const dialog = document.querySelectorAll(".dialog-modal");
 const openDialog = document.querySelectorAll(".open-dialog");
 const closeDialog = document.querySelectorAll(".close-dialog");
 const cancelDialog = document.querySelectorAll(".cancel-dialog");
+const closeSignupForm = document.getElementById("close-signup-form")
+
 
 openLogin.addEventListener("click", () => {
     loginForm.classList.replace("hidden", "flex");
