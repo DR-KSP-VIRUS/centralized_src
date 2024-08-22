@@ -37,6 +37,7 @@ class User(AbstractBaseUser):
     active = models.BooleanField(default=True)
     admin = models.BooleanField(default=False)
     staff = models.BooleanField(default=False)
+    full_name = models.CharField(max_length=255, null=True, blank=False)
     created = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = 'email'

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "_base.html" %}
 {% load static %}
 
 
@@ -39,8 +39,12 @@
                 </div>
                 <div class="flex place-content-between float-end">
                     <a href="{% url 'accounts:edit-portfolio' port.id %}"
-                        class="text-emerald-600 text-sm font-semibold border rounded px-6 py-2 transition shadow active:scale-90">Edit</a>
-                    <button type="button" class="open-dialog text-red-700 text-sm font-semibold border rounded px-6 py-2 transition shadow active:scale-90">Delete</button>
+                        class="text-orange-600 text-sm font-semibold border rounded px-6 py-2 transition shadow active:scale-90">
+                        <i class="fa fa-pen"></i>
+                    </a>
+                    <button type="button" class="open-dialog text-red-700 text-sm font-semibold border rounded px-6 py-2 transition shadow active:scale-90">
+                        <i class="fa fa-trash"></i>
+                    </button>
                 </div>
             </div>
         </div>

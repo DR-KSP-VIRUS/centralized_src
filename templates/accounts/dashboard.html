@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "_base.html" %}
 
 {% block title %} Dashboard {% endblock title %}
 
@@ -20,10 +20,13 @@
                 soluta!</p>
         </div>
         <div class="p-4 flex place-content-between">
-            <p class="text-emerald-600 text-sm font-semibold"><span class="text-gray-400 font-bold">views</span>
+            <p class="text-emerald-600 text-sm font-semibold">
+            <i class="fa fa-eye"></i>
                 2.8k
             </p>
-            <p class="text-red-700 text-sm font-semibold"><span class="font-bold text-gray-400">likes</span> 1.6k
+            <p class="text-red-700 text-sm font-semibold">
+                <i class="fa fa-heart"></i>
+                1.6k
             </p>
         </div>
     </div>
@@ -40,10 +43,13 @@
                 soluta!</p>
         </div>
         <div class="p-4 flex place-content-between">
-            <p class="text-emerald-600 text-sm font-semibold"><span class="text-gray-400 font-bold">views</span>
+            <p class="text-emerald-600 text-sm font-semibold">
+                <i class="fa fa-eye"></i>
                 2.8k
             </p>
-            <p class="text-red-700 text-sm font-semibold"><span class="font-bold text-gray-400">likes</span> 1.6k
+            <p class="text-red-700 text-sm font-semibold">
+                <i class="fa fa-heart"></i>
+                1.6k
             </p>
         </div>
     </div>
@@ -60,10 +66,13 @@
                 soluta!</p>
         </div>
         <div class="p-4 flex place-content-between">
-            <p class="text-emerald-600 text-sm font-semibold"><span class="text-gray-400 font-bold">views</span>
+            <p class="text-emerald-600 text-sm font-semibold">
+                <i class="fa fa-eye"></i>
                 2.8k
             </p>
-            <p class="text-red-700 text-sm font-semibold"><span class="font-bold text-gray-400">likes</span> 1.6k
+            <p class="text-red-700 text-sm font-semibold">
+                <i class="fa fa-heart"></i>
+                1.6k
             </p>
         </div>
     </div>
@@ -96,7 +105,9 @@
                     <td class="px-6 py-4 whitespace-nowrap">{{post.updated}}</ td>
                     <td class="px-6 py-4 whitespace-nowrap text-center">
                         <a href="{% url 'posts:blog_details' post.id %}"
-                            class="px-4 py-2 rounded text-black border bg-white font-semibold"> view</a>
+                            class="px-6 py-2 rounded border border-emerald-500 bg-white font-semibold"> 
+                            <i class="fa fa-eye text-emerald-600"></i>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}

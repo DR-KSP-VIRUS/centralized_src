@@ -17,3 +17,13 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+    
+class PostComment(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_user_comment')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_comments')
+    comment = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def _str__(self):
+        return self.comment[:50]

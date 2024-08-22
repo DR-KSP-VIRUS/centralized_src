@@ -7,47 +7,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%} {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static "src/fontawesome/css/all.min.css" %}">
+
     {% compress css %}
-        <link rel="stylesheet" href="{% static 'src/output.css' %}"/>
+        <link rel="stylesheet" href="{% static 'src/css/output.css' %}"/>
     {% endcompress %}
 </head>
 
 <body>
     {% comment %} npx tailwindcss -i ./static/src/input.css -o ./static/src/output.css {% endcomment %}
-    <div class="flex flex-col min-h-screen bg-gray-100">
-        {% if user.is_authenticated %}
-        <div class="grid grid-cols-12 bg-gray-100">
-            <div class="col-start-1 col-span-1 row-auto">
-                {% include "sidebar.html" %}
-            </div>
-            <div class="col-start-2 col-span-11 ml-[80px] lg:ml-[120px]">
-                <nav class="bg-gray-200/50 px-4 py-2 w-full border-b z-10">
-                    <ul class="flex place-content-between w-full">
-                        <li>
-                            {% block tab %}{% endblock tab %}
-                        </li>
-                        {% include "top_nav_profile.html" %}
-                    </ul>
-                </nav>
-                <div class="bg-gray-100/0 px-4 py-2 min-h-screen -z-20">
-                    {% block admincontent %}
-                    {% endblock admincontent %}
-                </div>
-                    {% include "footer.html" %}
-                </div>
-            </div>
-        </div> 
-        {% else %} 
+    <div class="flex flex-col min-h-screen bg-gray-200">
+        <div class="relative mb-10">
             {% include "nav.html" %}
-            {% include "accounts/login.html" %}
-            {% block content %}
-            {% endblock content %}
-        {% endif %}  
+        </div>
+        {% include "accounts/login.html" %}
+        {% block content %}
+        {% endblock content %}
     </div>
-    {% if not user.is_authenticated %}
-        {% include "footer.html" %}
-    {% endif %}
+    {% include "footer.html" %}
     <script src="{% static 'src/js/main.js' %}"></script>
+    {% block scripts %}{% endblock scripts %}
 </body>
 
 </html>

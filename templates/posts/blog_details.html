@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "_base.html" %}
 
 {% block title %}View | {{post.title}}{% endblock title %}
 
@@ -20,9 +20,12 @@
         <div class="flex place-content-between bg-white p-2">
             <a href="{% url 'posts:edit-blog' post.id %}"
                 class="px-6 py-2 text-orange-700 font-semibold rounded hover:shadow hover:border">
-                edit</a>
+                <i class="fa fa-pen"></i>
+                </a>
             <a href="{% url 'posts:remove-blog' post.id %}"
-                class="px-4 py-2 rounded hover:shadow hover:border text-red-600 font-semibold"> delete</a>
+                class="px-4 py-2 rounded hover:shadow hover:border text-red-600 font-semibold">
+                <i class="fa fa-trash"></i>
+            </a>
         </div>
     </div>
 </div>

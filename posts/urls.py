@@ -13,4 +13,5 @@ urlpatterns = [
     path('edit-blog/<int:id>', v.edit_blog, name='edit-blog'),
     path('delete-blog/<int:id>', v.remove_blog, name='remove-blog'),
     path('about-us', v.about_us, name='about-us'),
+    path('post/<int:post_id>/comment',v.add_comment, name='post-comment'),
 ]

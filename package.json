@@ -1,8 +1,5 @@
 {
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development CHOKIDAR_USEPOLLING=1 tailwindcss --postcss -i ./src/styles.css -o ../static/css/dist/styles.css -w"
-  },
   "devDependencies": {
-    "tailwindcss": "^3.4.6"
+    "tailwindcss": "^3.4.7"
   }
 }

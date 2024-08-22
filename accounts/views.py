@@ -81,3 +81,4 @@ def edit_portfolio(request:HttpRequest, id:int, *args, **kwargs)->HttpResponse:
     }
 
     return render(request, 'accounts/edit_portfolio.html', context)
+

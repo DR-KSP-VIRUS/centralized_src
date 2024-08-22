@@ -12,8 +12,12 @@ from accounts import models as ac_mdl
 
 def index(request,*args, **kwargs):
     login_form = ac_fms.LoginForm()
+    commentForm = fms.CommentForm()
+    posts = mdl.Post.objects.order_by('-updated').all()
     context = {
-        'form':login_form
+        'form':login_form,
+        'posts':posts,
+        'comment_form':commentForm
     }
     return render(request, 'posts/index.html', context)
 
@@ -79,3 +83,19 @@ def about_us(request:HttpRequest, *args, **kwargs):
         'form':login_form
     }
     return render(request, 'posts/about_us.html', context)
+
+def add_comment(request:HttpRequest, post_id:int, *args, **kwargs) -> HttpResponse:
+    post = get_object_or_404(mdl.Post, pk=post_id)
+    if request.method == 'POST':
+        form = fms.CommentForm(data=request.POST)
+        print('form posted')
+        if form.is_valid() and request.user.is_authenticated:
+            print('user authenitcated')
+            comment = form.save(commit=False)
+            comment.owner = request.user
+            comment.post = post
+            comment.save()
+            return redirect('posts:home')
+        print(request.user)
+        return redirect('accounts:login')
+    return redirect('posts:home')

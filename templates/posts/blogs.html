@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "_base.html" %}
 
 {% block title %}Blogs{% endblock title %}
 {% block tab %}
@@ -35,9 +35,15 @@
                     <td class="px-6 py-4 whitespace-nowrap">{{post.created}}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{post.updated}}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <a href="{% url 'posts:blog_details' post.id %}" class="px-4 py-2 rounded text-black border bg-white font-semibold"> view</a>
-                        <a href="{% url 'posts:edit-blog' post.id %}" class="px-4 py-2 rounded text-orange-700 bg-white border font-semibold"> edit</a>
-                        <a href="{% url 'posts:remove-blog' post.id %}" class="px-2 py-2 rounded text-red-600 bg-white border font-semibold"> delete</a>
+                        <a href="{% url 'posts:blog_details' post.id %}" class="px-4 py-2 rounded text-black border bg-white font-semibold">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a href="{% url 'posts:edit-blog' post.id %}" class="px-4 py-2 rounded text-orange-700 bg-white border font-semibold">
+                            <i class="fa fa-pen"></i>
+                        </a>
+                        <a href="{% url 'posts:remove-blog' post.id %}" class="px-2 py-2 rounded text-red-600 bg-white border font-semibold">
+                            <i class="fa fa-trash"></i>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}

@@ -20,3 +20,16 @@ class BlogForm(forms.ModelForm):
                 'required':True
             }),
         }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = mdl.PostComment
+        fields = ('comment',)
+        widgets = {
+            'comment': forms.Textarea(attrs={
+                'class':'form-control',
+                'required':True, 'autofocus':True,
+                'placeholder':'Type your comment here ...',
+                'rows':2,
+            })
+        }
