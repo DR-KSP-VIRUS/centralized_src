@@ -36,6 +36,7 @@ class UserManager(BaseUserManager):
         user = self.create(
             email, password=password, is_student=True
         )
+        return user
 
 # Create your models here.
 class User(AbstractBaseUser):

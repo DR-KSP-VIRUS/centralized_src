@@ -26,9 +26,9 @@ def user_login_form(request: HttpRequest,*args, **kwargs) -> HttpResponse:
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user=user)
-                if user.student:
-                    return redirect('posts:home')
-                return redirect('accounts:dashboard')
+                if user.is_admin:
+                    return redirect('accounts:dashboard')
+                return redirect('posts:home')
             return redirect('posts:home')
         return redirect('posts:home')
     return redirect('posts:home')
