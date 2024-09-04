@@ -3,14 +3,8 @@
         <h1 class="font-extrabold text-2xl px-4 py-2 min-w-full flex flex-row place-content-between border-b"> Add Blog <span id="close-form" class="text-red-600 cursor-pointer">&times;</span> </h1>
         <form class="flex flex-col px-4 py-2" action="{% url 'posts:add-blog' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="flex flex-col my-2">
-                <label class="font-semibold my-2">{{form.title.label}}:</label>
-                {{ form.title}}
-            </div>
-            <div class="flex flex-col my-2">
-                <label class="font-semibold my-2">{{form.content.label}}:</label>
-                {{ form.content}}
-            </div>
+            {{ form.media }}
+            {{ form.as_p }}
             <button type="submit" class="cursor-pointer px-4 py-2 border border-orange-600 my-4 rounded w-full self-center shadow-inner transition hover:bg-orange-700 hover:text-white active:scale-90">Save</button>
         </form>
     </div>

@@ -27,10 +27,6 @@
             <form class="flex flex-col px-4 py-2 min-w-full" action="{% url 'accounts:signup' %}" method="POST">
                 {% csrf_token %}
                 <div class="flex flex-col my-2">
-                    <label class="font-semibold my-2">{{signupform.full_name.label}}:</label>
-                    {{ signupform.full_name}}
-                </div>
-                <div class="flex flex-col my-2">
                     <label class="font-semibold my-2">{{signupform.email.label}}:</label>
                     {{ signupform.email}}
                 </div>

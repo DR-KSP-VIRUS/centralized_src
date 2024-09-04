@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%} {% endblock title %}</title>
-    <link rel="stylesheet" href="{% static "src/fontawesome/css/all.min.css" %}">
+    <link rel="stylesheet" href="{% static "fontawesome/css/all.min.css" %}">
 
     {% compress css %}
-        <link rel="stylesheet" href="{% static 'src/css/output.css' %}"/>
+        <link rel="stylesheet" href="{% static 'css/output.css' %}"/>
     {% endcompress %}
 </head>
 
@@ -25,8 +25,14 @@
         {% endblock content %}
     </div>
     {% include "footer.html" %}
-    <script src="{% static "src/js/main.js" %}"></script>
-    <script src="{% static "src/js/auth.js" %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.
+js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew
++OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.
+bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/
+2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="{% static "js/main.js" %}"></script>
+    <script src="{% static "js/auth.js" %}"></script>
     {% block scripts %}{% endblock scripts %}
 </body>
 

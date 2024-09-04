@@ -15,7 +15,7 @@ def index(request,*args, **kwargs):
     commentForm = fms.CommentForm()
     posts = mdl.Post.objects.order_by('-updated').all()
     signup_form = ac_fms.SignupForm()
-
+    print(request.user)
     context = {
         'form':login_form,
         'posts':posts,
@@ -27,6 +27,7 @@ def index(request,*args, **kwargs):
 @login_required
 def add_blog(request: HttpRequest,*args, **kwargs) -> HttpResponse:
     if request.method == 'POST':
+        print("form posted")
         form = fms.BlogForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             blog = form.save(commit=False)
@@ -94,7 +95,6 @@ def add_comment(request:HttpRequest, post_id:int, *args, **kwargs) -> HttpRespon
     post = get_object_or_404(mdl.Post, pk=post_id)
     if request.method == 'POST':
         form = fms.CommentForm(data=request.POST)
-        print('form posted')
         if form.is_valid() and request.user.is_authenticated:
             print('user authenitcated')
             comment = form.save(commit=False)
@@ -102,6 +102,5 @@ def add_comment(request:HttpRequest, post_id:int, *args, **kwargs) -> HttpRespon
             comment.post = post
             comment.save()
             return redirect('posts:home')
-        print(request.user)
         return redirect('accounts:login')
     return redirect('posts:home')

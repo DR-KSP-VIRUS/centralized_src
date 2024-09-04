@@ -15,7 +15,7 @@
             <span class="font-thin text-sm italic text-gray-400">{{post.updated}}</span>
         </h2>
         <div class="text-gray-600 mb-2 px-2">
-            <p>{{post.content|truncatechars:500}}</p>
+            <p>{{post.text|safe|truncatechars:500}}</p>
         </div>
         <div class="flex place-items-center px-2 items-end py-4 border-b">
             <a class="cursor-pointer comment-sections">
@@ -27,7 +27,7 @@
             <div class=" py-2 mx-2 my-2">
                 {% for comment in post.post_comments.all %}
                 <div class="ml-4 px-2 bg-gray-100 my-2 rounded">
-                    <h3 class="font-semibold flex place-content-between place-items-center">{{post.owner.full_name}}
+                    <h3 class="font-semibold flex place-content-between place-items-center">{{post.owner.user_profile|title}}
                         {% if request.user == post.owner %}
                         <span class="mx-">
                             <a class="mx-2 cursor-pointer">
@@ -72,7 +72,7 @@
 {% endblock content %}
 
 {% block scripts %}
-<script src="{% static 'src/js/comment.js' %}"></script>
+<script src="{% static 'js/comment.js' %}"></script>
 
 {% endblock scripts %}
 

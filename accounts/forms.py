@@ -24,15 +24,11 @@ class SignupForm(forms.ModelForm):
     }))
     class Meta:
         model = mdl.User
-        fields = ('full_name','email',)
+        fields = ('email',)
         widgets = {
             'email':forms.EmailInput(attrs={
                 'class':'form-control',
                 'placeholder':'Enter active email...',
-            }),
-            'full_name': forms.TextInput(attrs={
-                'class':'form-control',
-                'placeholder':'e.g Konja Kuma'
             })
         }
 
@@ -102,5 +98,25 @@ class PortfolioForm(forms.ModelForm):
                 'class':"form-control",
                 'placeholder':'e.g 2024/2025',
                 'required':True
+            })
+        }
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = mdl.Profile
+        fields = ('full_name', 'phone','gender','image')
+        widgets = {
+            'full_name':forms.TextInput(attrs={
+                'class':'form-control',
+                'autofocus':True
+            }),
+            'phone':forms.TextInput(attrs={
+                'class':'form-control'
+            }),
+            'gender':forms.Select(attrs={
+                'class':'form-control'
+            }),
+            'image':forms.ClearableFileInput(attrs={
+                'class':'form-control'
             })
         }

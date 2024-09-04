@@ -1,9 +1,10 @@
 {% load static %}
 <li class="profile">
-    <img class="w-8 h-8 rounded-full border hover:cursor-pointer" src="{% static 'src/images/CK-LOGO.png' %}" alt="#">
+    <img class="w-8 h-8 rounded-full border hover:cursor-pointer" src="{% static 'images/CK-LOGO.png' %}" alt="#">
     <ul class="hidden absolute top-10 right-7 bg-gray-100 shadow z-40">
-        <li class="pl-4 pr-12 py-2 hover:bg-white hover:cursor-pointer hover:border-t hover:border-b">Profile</li>
-        <li class="pl-4 pr-12 py-2 hover:bg-white hover:cursor-pointer hover:border-t hover:border-b">Settings</li>
+        <li class="pl-4 pr-12 py-2 hover:bg-white hover:cursor-pointer hover:border-t hover:border-b">
+            <a href="{% url 'accounts:profile' %}">Profile</a>
+        </li>
         <li class="pl-4 pr-12 py-2 text-red-700 hover:bg-white hover:cursor-pointer hover:border-t hover:border-b">
             <a href="{% url 'accounts:logout' %}">logout</a>
         </li>

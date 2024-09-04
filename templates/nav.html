@@ -3,19 +3,13 @@
         <li class="cursor-pointer hover:border-b">
             <a href="{% url 'posts:home' %}"> Home </a>
         </li>
-        {% if not user.is_authenticated %}
-            <ul class="mx-auto flex">
-            <li class="mx-2 cursor-pointer hover:border-b">Blog
-                <ul class="hidden">
-                    <li class="cursor-pointer">Current News</li>
-                    <li class="cursor-pointer">previous News</li>
-                </ul>
-            </li>
+        <ul class="mx-auto flex">
             <li class="mx-2 cursor-pointer hover:border-b ">
-                <a class="whitespace-nowrap" href="{% url 'posts:about-us' %}">About Us</a>
+                <a class="whitespace-nowrap" href="{% url 'posts:about-us' %}">Porfolios</a>
             </li>
-            </ul>
+        </ul>
         
+        {% if not user.is_authenticated %}
             <li id="open-login" class="cursor-pointer hover:border-b">login</li>
         {% else %}
             <li  class="cursor-pointer text-red-500 hover:border-b">

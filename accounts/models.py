@@ -45,7 +45,6 @@ class User(AbstractBaseUser):
     admin = models.BooleanField(default=False)
     staff = models.BooleanField(default=False)
     student = models.BooleanField(default=False)
-    full_name = models.CharField(max_length=255, null=True, blank=False)
     created = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = 'email'
@@ -97,3 +96,22 @@ class Portfolio(models.Model):
 
     def __str__(self) -> str:
         return f'{self.full_name}'
+    
+class Profile(models.Model):
+    GENDER = (
+        ('','... Select Gender'),
+        ('male','Male'),
+        ('female','Female')
+    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
+    full_name = models.CharField(max_length=255, null=True, blank=False)
+    phone = models.CharField(max_length=255, null=True, blank=False)
+    image = models.ImageField(upload_to='uploads/%Y/%M/%d', null=True)
+    gender = models.CharField(max_length=255,null=True,choices=GENDER)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        if not self.full_name:
+            return self.user.email  
+        return self.full_name

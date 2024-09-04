@@ -7,10 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%} {% endblock title %}</title>
-    <link rel="stylesheet" href="{% static "src/fontawesome/css/all.min.css" %}">
+    
+    <link rel="stylesheet" href="{% static "fontawesome/css/all.min.css" %}">
+    <link href="{% static 'django_ckeditor_5/dist/styles.css' %}" type="text/css" media="all" rel="stylesheet">
+    <script src="{% static 'django_ckeditor_5/dist/bundle.js' %}"></script>
 
     {% compress css %}
-        <link rel="stylesheet" href="{% static "src/css/output.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/output.css" %}"/>
     {% endcompress %}
 </head>
 
@@ -40,7 +43,7 @@
         </div> 
         {% endif %}  
     </div>
-    <script src="{% static 'src/js/main.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>
