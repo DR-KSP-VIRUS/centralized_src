@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="bg-black/80 z-40 fixed w-full backdrop-blur-sm text-white px-8 py-4">
     <ul class="flex place-content-between">
         <li class="cursor-pointer hover:border-b">
@@ -12,8 +14,17 @@
         {% if not user.is_authenticated %}
             <li id="open-login" class="cursor-pointer hover:border-b">login</li>
         {% else %}
-            <li  class="cursor-pointer text-red-500 hover:border-b">
-                <a href="{% url 'accounts:logout' %}">logout</a>
+
+            <li class="profile text-black">
+                <img class="w-8 h-8 rounded-full border hover:cursor-pointer" {% if not request.user.user_profile %} src="{% static 'images/CK-LOGO.png' %}" {%else%} src="{{request.user.user_profile.image.url}}" {% endif %}  alt="#">
+                <ul class="hidden absolute top-10 right-7 bg-gray-100 shadow z-40">
+                    <li class="pl-4 pr-12 py-2 hover:bg-white hover:cursor-pointer hover:border-t hover:border-b">
+                        <a href="{% url 'accounts:student-profile' %}">Profile</a>
+                    </li>
+                    <li class="pl-4 pr-12 py-2 text-red-700 hover:bg-white hover:cursor-pointer hover:border-t hover:border-b">
+                        <a href="{% url 'accounts:logout' %}">logout</a>
+                    </li>
+                </ul>
             </li>
         {% endif %}
     </ul>

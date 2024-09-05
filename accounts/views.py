@@ -109,3 +109,21 @@ def profile(request:HttpRequest, *args, **kwargs) -> HttpResponse:
         'profile':user_profile
     }
     return render(request, 'accounts/profile.html', context)
+
+def student_profile(request:HttpRequest, *args, **kwargs) -> HttpResponse:
+    user_profile = mdl.Profile.objects.filter(user=request.user).first()
+    if request.method == 'POST':
+        form = fms.ProfileForm(data=request.POST,files=request.FILES, instance=user_profile)
+        if form.is_valid():
+            new_profile = form.save(commit=False)
+            if user_profile is None:
+                new_profile.user = request.user
+            new_profile.save()
+            return redirect('accounts:student-profile')
+    else:
+        form = fms.ProfileForm(instance=user_profile)
+    context = {
+        'form':form,
+        'profile':user_profile
+    }
+    return render(request, 'accounts/student_profile.html', context)

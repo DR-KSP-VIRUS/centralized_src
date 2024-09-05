@@ -15,7 +15,6 @@ def index(request,*args, **kwargs):
     commentForm = fms.CommentForm()
     posts = mdl.Post.objects.order_by('-updated').all()
     signup_form = ac_fms.SignupForm()
-    print(request.user)
     context = {
         'form':login_form,
         'posts':posts,
@@ -96,11 +95,15 @@ def add_comment(request:HttpRequest, post_id:int, *args, **kwargs) -> HttpRespon
     if request.method == 'POST':
         form = fms.CommentForm(data=request.POST)
         if form.is_valid() and request.user.is_authenticated:
-            print('user authenitcated')
             comment = form.save(commit=False)
             comment.owner = request.user
             comment.post = post
             comment.save()
             return redirect('posts:home')
         return redirect('accounts:login')
+    return redirect('posts:home')
+
+def delete_comment(request:HttpRequest, id:int, *args, **kwargs) -> HttpResponse:
+    comment = get_object_or_404(mdl.PostComment, pk=id)
+    comment.delete()
     return redirect('posts:home')

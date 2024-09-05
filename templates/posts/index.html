@@ -27,13 +27,13 @@
             <div class=" py-2 mx-2 my-2">
                 {% for comment in post.post_comments.all %}
                 <div class="ml-4 px-2 bg-gray-100 my-2 rounded">
-                    <h3 class="font-semibold flex place-content-between place-items-center">{{post.owner.user_profile|title}}
-                        {% if request.user == post.owner %}
+                    <h3 class="font-semibold flex place-content-between place-items-center">{{comment.owner.user_profile | title}}
+                        {% if request.user == comment.owner %}
                         <span class="mx-">
                             <a class="mx-2 cursor-pointer">
                                 <i class="fa fa-pen text-orange-500 text-sm"></i>
                             </a>
-                            <a class="mx-2 cursor-pointer">
+                            <a href="{% url 'posts:delete-comment' comment.id %}" class="mx-2 cursor-pointer">
                                 <i class="fa fa-trash text-red-600 text-sm"></i>
                             </a>
                         </span>

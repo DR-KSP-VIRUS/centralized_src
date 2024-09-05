@@ -19,14 +19,15 @@
         </h1>
         <form class="flex flex-col px-4 py-2" action="{% url 'posts:edit-blog' post.id %}" method="POST">
             {% csrf_token %}
+            {{ form.media }}
             <div class="flex flex-col my-2">
                 <label class="font-semibold my-2">{{form.title.label}}</label>
                 {{ form.title}}
 
             </div>
             <div class="flex flex-col my-2">
-                <label class="my-2 font-semibold">{{form.content.label}}</label>
-                {{form.content}}
+                <label class="my-2 font-semibold">{{form.text.label}}</label>
+                {{form.text}}
             </div>
             <button type="submit"
                 class="cursor-pointer px-4 py-2 border border-orange-600 my-4 rounded w-full self-center shadow-inner transition hover:bg-orange-700 hover:text-white active:scale-90">Update</button>
