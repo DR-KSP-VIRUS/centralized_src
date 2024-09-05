@@ -1,7 +1,7 @@
 {% load static %}
 <ul class="bg-black/80 fixed overflow-hidden text-white flex flex-col min-h-screen w-[55px] lg:w-[180px]">
     <a href="{% url "posts:home" %}" class="mt-16 mb-8 flex flex-col mx-4 lg:mx-8">
-            <img class="w-6 h-6 rounded-full border hover:cursor-pointer lg:w-12 lg:h-12" src="{% static 'images/CK-LOGO.png' %}" alt="#">
+            <img class="w-6 h-6 rounded-full border hover:cursor-pointer lg:w-12 lg:h-12" {% if not request.user.user_profile %} src="{% static 'images/CK-LOGO.png' %}" {% else %} src="{{request.user.user_profile.image.url}}" {% endif %}  alt="#">
         <h2 class="py-2 hidden lg:block">{{request.user.user_profile}}</h2>
     </a>
 
