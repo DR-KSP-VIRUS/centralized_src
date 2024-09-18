@@ -1,49 +1,48 @@
 <!DOCTYPE html>
+
 {% load compress %}
 {% load static %}
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title%} {% endblock title %}</title>
-    
-    <link rel="stylesheet" href="{% static "fontawesome/css/all.min.css" %}">
-    <link href="{% static 'django_ckeditor_5/dist/styles.css' %}" type="text/css" media="all" rel="stylesheet">
-    <script src="{% static 'django_ckeditor_5/dist/bundle.js' %}"></script>
-
     {% compress css %}
-        <link rel="stylesheet" href="{% static "css/output.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
     {% endcompress %}
+    <link rel="stylesheet" href="{% static "fontawesome/css/all.min.css" %}">
+    <link href="{% static 'django_ckeditor_5/dist/styles.css' %}" type="text/
+    css" media="all" rel="stylesheet">
+    <script src="{% static 'django_ckeditor_5/dist/bundle.js' %}"></script>
+    <title>{% block title %}{% endblock title %}</title>
 </head>
-
 <body>
-    {% comment %} npx tailwindcss -i ./static/src/input.css -o ./static/src/output.css {% endcomment %}
     <div class="flex flex-col min-h-screen bg-gray-100">
-        {% if user.is_authenticated %}
-        <div class="grid grid-cols-12 bg-gray-100">
-            <div class="col-start-1 col-span-1 row-auto">
-                {% include "sidebar.html" %}
+    {% if user.is_authenticated %}
+    <div class="grid grid-cols-12 bg-gray-100">
+        <div class="col-start-1 col-span-1 row-auto">
+            {% include "sidebar.html" %}
+        </div>
+        <div class="col-start-2 col-span-11 ml-[24px] md:-ml-[5px] lg:ml-[96px] xl:ml-[73px]">
+            <nav class="bg-gray-200/50 px-4 py-2 w-full border-b z-10">
+                <ul class="flex place-content-between w-full">
+                    <li>
+                        {% block tab %}{% endblock tab %}
+                    </li>
+                    {% include "top_nav_profile.html" %}
+                </ul>
+            </nav>
+            <div class="bg-gray-100/0 px-4 py-2 min-h-screen -z-20">
+                {% block admincontent %}
+                {% endblock admincontent %}
             </div>
-            <div class="col-start-2 col-span-11 ml-[24px] md:-ml-[5px] lg:ml-[96px] xl:ml-[73px]">
-                <nav class="bg-gray-200/50 px-4 py-2 w-full border-b z-10">
-                    <ul class="flex place-content-between w-full">
-                        <li>
-                            {% block tab %}{% endblock tab %}
-                        </li>
-                        {% include "top_nav_profile.html" %}
-                    </ul>
-                </nav>
-                <div class="bg-gray-100/0 px-4 py-2 min-h-screen -z-20">
-                    {% block admincontent %}
-                    {% endblock admincontent %}
-                </div>
-                {% include "footer.html" %}
-            </div>
-        </div> 
-        {% endif %}  
-    </div>
-    <script src="{% static 'js/main.js' %}"></script>
+            {% include "footer.html" %}
+        </div>
+    </div> 
+    {% endif %}  
+</div>
+<script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>

@@ -33,3 +33,25 @@ class CommentForm(forms.ModelForm):
                 'rows':2,
             })
         }
+
+class ComplainForm(forms.ModelForm):
+    class Meta:
+        model = mdl.Complain
+        fields = ('text',)
+        widgets = {
+            'text':forms.Textarea(attrs={
+                'class':'form-control',
+                'required':True, 'rows':3
+            }),
+        }
+
+class FeedBackForm(forms.ModelForm):
+    class Meta:
+        model = mdl.FeedBack
+        fields = ('text',)
+        widgets = {
+            'text':forms.Textarea(attrs={
+                'class':'form-control',
+                'required':True
+            })
+        }

@@ -9,6 +9,11 @@
             <li class="mx-2 cursor-pointer hover:border-b ">
                 <a class="whitespace-nowrap" href="{% url 'posts:about-us' %}">Porfolios</a>
             </li>
+            {% if request.user.is_authenticated %}
+            <li class="mx-2 cursor-pointer hover:border-b ">
+                <a class="whitespace-nowrap" href="{% url 'posts:user-complains' %}">Complains</a>
+            </li>
+            {% endif %}
         </ul>
         
         {% if not user.is_authenticated %}
@@ -16,7 +21,7 @@
         {% else %}
 
             <li class="profile text-black">
-                <img class="w-8 h-8 rounded-full border hover:cursor-pointer" {% if not request.user.user_profile %} src="{% static 'images/CK-LOGO.png' %}" {%else%} src="{{request.user.user_profile.image.url}}" {% endif %}  alt="#">
+                <img class="w-8 h-8 rounded-full border hover:cursor-pointer" {% if not request.user.user_profile %} src="{% static 'src/images/CK-LOGO.png' %}" {%else%} src="{{request.user.user_profile.image.url}}" {% endif %}  alt="#">
                 <ul class="hidden absolute top-10 right-7 bg-gray-100 shadow z-40">
                     <li class="pl-4 pr-12 py-2 hover:bg-white hover:cursor-pointer hover:border-t hover:border-b">
                         <a href="{% url 'accounts:student-profile' %}">Profile</a>

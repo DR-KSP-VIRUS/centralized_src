@@ -8,14 +8,14 @@
 <div class="p-4">
     <h1 class="text-black text-3xl font-semibold">Current news update</h1>
 </div>
-<div class="px-4">
+<div class="px-4 flex flex-col place-content-center place-items-center">
     {% for post in posts %}
-    <div class="bg-white my-2 rounded-md md:w-[600px]">
+    <div class="bg-white my-2 rounded-md">
         <h2 class="font-semibold text-xl px-2 py-3 flex place-content-between place-items-center">{{post.title}}
             <span class="font-thin text-sm italic text-gray-400">{{post.updated}}</span>
         </h2>
         <div class="text-gray-600 mb-2 px-2">
-            <p>{{post.text|safe|truncatechars:500}}</p>
+            <p>{{post.text|safe}}</p>
         </div>
         <div class="flex place-items-center px-2 items-end py-4 border-b">
             <a class="cursor-pointer comment-sections">

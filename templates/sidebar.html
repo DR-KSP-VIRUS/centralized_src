@@ -1,7 +1,7 @@
 {% load static %}
 <ul class="bg-black/80 fixed overflow-hidden text-white flex flex-col min-h-screen w-[55px] lg:w-[180px]">
     <a href="{% url "posts:home" %}" class="mt-16 mb-8 flex flex-col mx-4 lg:mx-8">
-            <img class="w-6 h-6 rounded-full border hover:cursor-pointer lg:w-12 lg:h-12" {% if not request.user.user_profile %} src="{% static 'images/CK-LOGO.png' %}" {% else %} src="{{request.user.user_profile.image.url}}" {% endif %}  alt="#">
+            <img class="w-6 h-6 rounded-full border hover:cursor-pointer lg:w-12 lg:h-12" {% if not request.user.user_profile %} src="{% static 'src/images/CK-LOGO.png' %}" {% else %} src="{{request.user.user_profile.image.url}}" {% endif %}  alt="#">
         <h2 class="py-2 hidden lg:block">{{request.user.user_profile}}</h2>
     </a>
 
@@ -21,6 +21,12 @@
         <a class="w-full flex place-items-center" href="{% url 'accounts:portfolios' %}">
             <i class="fa fa-users px-4 text-2xl"></i>
             <span class="lg:px-1">Portfolio</span>
+        </a>
+    </li>
+    <li class="cursor-pointer my-2 py-3 hover:bg-black/50">
+        <a class="w-full flex place-items-center" href="{% url 'posts:complains' %}">
+            <i class="fa fa-message px-4 text-2xl"></i>
+            <span class="lg:px-1">Complains</span>
         </a>
     </li>
     <li class="cursor-pointer mb-0 py-4 my-auto border-t text-red-500 hover:border-b">

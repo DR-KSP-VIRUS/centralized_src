@@ -1,0 +1,53 @@
+{% extends "_base.html" %}
+
+{% block title %}Complain{% endblock title %}
+{% block tab %}
+    <h1 class="font-semibold text-2xl">Complain</h1>
+{% endblock tab %}
+
+{% block admincontent %}
+<div class="flex flex-col place-items-start w-full px-4 my-12 md:flex-row">
+    <div
+        class="bg-white relative flex flex-col w-full rounded shadow-md shadow-gray-200 md:mr-1">
+        <h1 class="font-semibold text-gray-500 text-2xl border-b text-center py-4 md:my-3">Sent Complain</h1>
+        <div class="h-72 overflow-y-scroll md:h-full">
+        <div class="bg-white my-2 rounded-md ">
+            <h2 class="font-semibold text-xl px-2 py-3 flex place-content-between place-items-center">
+                {{complains.user.user_profile}}
+                <span class="font-thin text-sm italic text-gray-400">{{complain.updated}}</span>
+            </h2>
+            <div class="text-gray-600 mb-2 px-2">
+                <p>{{complain.text}}</p>
+            </div>
+            <div class="py-2 border-t px-2 ">
+                <div class="py-2 mx-2 my-2">
+                    
+                    {% for feedback in complain.complain_feedback.all %}
+                    <div class="ml-4 px-2 bg-gray-100 my-2 rounded">
+                        <h3 class="font-semibold flex place-content-between place-items-center">
+                            {{feedback.user.user_profile | title}}
+                        </h3>
+                        <p class="ml-2 text-gray-700 py-2">{{feedback.text}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div
+        class="bg-white flex flex-col place-content-center w-full md:w-[390px] py-2 rounded shadow-md mt-4 md:mt-0 md:ml-2">
+        <h1 class="font-semibold text-gray-500 text-2xl border-b py-2 px-4">Send A feedback</h1>
+        <form class="flex flex-col px-4 py-2" action="{% url 'posts:complain_details' complain.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{form.text}}
+            </div>
+            <div class="flex place-items-center place-content-end">
+                <button type="submit"
+                    class="cursor-pointer px-4 py-2 border border-orange-600 my-4 rounded w-1/3 self-center shadow-inner transition hover:bg-orange-700 hover:text-white active:scale-90">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock admincontent %}

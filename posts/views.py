@@ -9,7 +9,6 @@ from accounts import models as ac_mdl
 
 # Create your views here.
 
-
 def index(request,*args, **kwargs):
     login_form = ac_fms.LoginForm()
     commentForm = fms.CommentForm()
@@ -19,7 +18,7 @@ def index(request,*args, **kwargs):
         'form':login_form,
         'posts':posts,
         'comment_form':commentForm,
-        'signupform':signup_form
+        'signupform':signup_form,
     }
     return render(request, 'posts/index.html', context)
 
@@ -86,7 +85,7 @@ def about_us(request:HttpRequest, *args, **kwargs):
     context = {
         'ports':portfolios,
         'form':login_form,
-        'signupform':signup_form
+        'signupform':signup_form,
     }
     return render(request, 'posts/about_us.html', context)
 
@@ -107,3 +106,53 @@ def delete_comment(request:HttpRequest, id:int, *args, **kwargs) -> HttpResponse
     comment = get_object_or_404(mdl.PostComment, pk=id)
     comment.delete()
     return redirect('posts:home')
+
+def send_complain(request:HttpRequest, *args, **kwargs) -> HttpResponse:
+    complains = mdl.Complain.objects.all()
+    if request.method == 'POST':
+        form = fms.ComplainForm(data=request.POST)
+        if form.is_valid():
+            new_complain = form.save(commit=False)
+            new_complain.user = request.user
+            new_complain.save()
+            return redirect('posts:user-complains')
+    else:
+        complain_form = fms.ComplainForm()
+
+    context = {
+        'complain_form':complain_form,
+        'complains':complains
+    }
+    return render(request, 'posts/user_complains.html',context)
+
+def complain_details(request:HttpRequest, id:int, *args, **kwargs) -> HttpResponse:
+    complain = get_object_or_404(mdl.Complain, pk=id)
+    if request.method == 'POST':
+        form = fms.FeedBackForm(data=request.POST)
+        if form.is_valid():
+            new_feedback = form.save(commit=False)
+            new_feedback.user = request.user
+            new_feedback.complain = complain
+            new_feedback.save()
+            return redirect('posts:complain_details', id)
+    else:
+        form = fms.FeedBackForm()
+    context =  {
+        'form':form,
+        'complain':complain
+    }
+    return render(request, 'posts/complain_details.html', context)
+
+def feedback_list(request:HttpRequest, *args, **kwargs) -> HttpResponse:
+    feedbacks = mdl.FeedBack.objects.all()
+    context =  {
+        'feedbacks':feedbacks
+    }
+    return render(request, 'posts/feedbacks.html',context)
+
+def complain_list(request:HttpRequest, *args, **kwargs) -> HttpResponse:
+    complains = mdl.Complain.objects.all()
+    context =  {
+        'complains':complains
+    }
+    return render(request, 'posts/complains.html',context)
